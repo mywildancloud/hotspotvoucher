@@ -1,0 +1,1 @@
+document.write('BADARO.ID') //Ganti dengan Nama Wifi Agan

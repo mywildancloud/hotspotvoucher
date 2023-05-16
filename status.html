@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	$(if refresh-timeout)
+	<meta http-equiv="refresh" content="$(refresh-timeout-secs); $(link-status)">
+	$(endif)
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, viewport-fit=cover" />
+    <title>STATUS</title>
+    <link rel="icon" type="image/png" href="assets/img/favicon.png" sizes="32x32">
+    <link rel="stylesheet" href="assets/css/style.css">
+	<script language="JavaScript">
+
+		$(if advert-pending == 'yes')
+			var popup = '';
+			function focusAdvert() {
+				if (window.focus) popup.focus();
+				}
+			function openAdvert() {
+				popup = open('$(link-advert)', 'hotspot_advert', '');
+				setTimeout("focusAdvert()", 200);
+				}
+			$(endif)
+			function openLogout() {
+				if (window.name != 'hotspot_status') return true;
+				open('$(link-logout)', 'hotspot_logout', 'toolbar=0,location=0,directories=0,status=0,menubars=0,resizable=1,width=280,height=250');
+				window.close();
+				return false;
+				}
+
+	</script>
+</head>
+
+<body class="bg-white">
+
+    <!-- App Header -->
+    <div class="appHeader">
+        <div class="left"><div class="headerButton">
+            <div class="form-check form-switch">
+                <input class="form-check-input dark-mode-switch" type="checkbox" id="darkmodeSwitch">
+                <label class="form-check-label" for="darkmodeSwitch"></label>
+            </div>
+        </div></div>
+        <div class="pageTitle">
+            Status
+        </div>
+        <div class="right">
+            <a href="javascript:;" class="headerButton" data-bs-toggle="modal" data-bs-target="#DialogBasic">
+                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"  width="24" height="24" viewBox="0 0 24 24">
+				<path fill="#6236FF" d="M16,17V14H9V10H16V7L21,12L16,17M14,2A2,2 0 0,1 16,4V6H14V4H5V20H14V18H16V20A2,2 0 0,1 14,22H5A2,2 0 0,1 3,20V4A2,2 0 0,1 5,2H14Z" />
+				</svg>
+            </a>
+        </div>
+    </div>
+    <!-- * App Header -->
+
+    <!-- Dialog Basic -->
+    <div class="modal fade dialogbox" id="DialogBasic" data-bs-backdrop="static" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Logout</h5>
+                </div>
+                <div class="modal-body">
+                    Anda Yakin?
+                </div>
+                <form action="$(link-logout)" class="modal-footer" name="logout" onSubmit="return openLogout()">
+					<input type="hidden" name="erase-cookie" value="on">
+                    <div class="btn-inline">
+                        <a href="#" class="btn btn-text-secondary" data-bs-dismiss="modal">BATAL</a>
+                        $(if login-by-mac != 'yes')<button type="submit" class="btn btn-text-primary">LOGOUT</button>$(endif)
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- * Dialog Basic -->
+
+    <!-- App Capsule -->
+    <div id="appCapsule" class="full-height">
+
+        <div class="section mt-2 mb-2">
+
+
+            <div class="listed-detail mt-3">
+                <div class="icon-wrapper">
+                    <div class="iconbox">
+						<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"  width="36" height="36" viewBox="0 0 24 24">
+						<path fill="#ffffff" d="M11 4C8.8 4 7 5.8 7 8S8.8 12 11 12 15 10.2 15 8 13.2 4 11 4M11 14C6.6 14 3 15.8 3 18V20H12.5C12.2 19.2 12 18.4 12 17.5C12 16.3 12.3 15.2 12.9 14.1C12.3 14.1 11.7 14 11 14M18 20C16.6 20 15.5 18.9 15.5 17.5C15.5 17.1 15.6 16.7 15.8 16.4L14.7 15.3C14.3 15.9 14 16.7 14 17.5C14 19.7 15.8 21.5 18 21.5V23L20.2 20.8L18 18.5V20M18 13.5V12L15.8 14.2L18 16.4V15C19.4 15 20.5 16.1 20.5 17.5C20.5 17.9 20.4 18.3 20.2 18.6L21.3 19.7C21.7 19.1 22 18.3 22 17.5C22 15.3 20.2 13.5 18 13.5Z" />
+						</svg>
+                    </div>
+                </div>
+                <h3 class="text-center mt-2">Selamat Datang $(if login-by == 'trial')<span id="user" class="text-success">User</span>$(elif login-by != 'mac') <span id="user" class="text-success">$(username)</span>$(endif)
+            </div>
+
+            <ul class="listview flush transparent simple-listview no-space mt-3">
+                <li>
+                    <strong>IP</strong>
+                    <span class="text-danger">$(ip)</span>
+                </li>
+                <li>
+                    <strong>MAC</strong>
+                    <span class="text-warning">$(mac)</span>
+                </li>
+				<li>
+                    <strong>Upload</strong>
+                    <span>$(bytes-out-nice)</span>
+                </li>
+				<li>
+                    <strong>Download</strong>
+                    <span>$(bytes-in-nice)</span>
+                </li>
+                <li>
+                    <strong>Sisa Kuota</strong>
+                    <span>$(if remain-bytes-total) $(remain-bytes-total-nice) $(else)Loss Unlimited $(endif)</span>
+                </li>
+                <li>
+                    <strong>Terhubung</strong>
+                    <span id="uptimeStatus" data-secs="$(uptime-secs)">$(uptime)</span>
+                </li>
+				$(if session-time-left)
+                <li>
+                    <strong>Tersisa</strong>
+                    <span id="timeLeftStatus" data-secs="$(session-time-left-secs)">$(session-time-left)</span>$(endif)
+                </li>
+				<li>
+                    <strong>Expired</strong>
+                    <span><a href="masaaktif.html">Cek Detail</a></span>
+                </li>
+            </ul>
+
+
+        </div>
+
+    </div>
+    <!-- * App Capsule -->
+
+    <!-- App Bottom Menu -->
+    <div class="appBottomMenu">
+        <a href="$(link-status)" class="item active">
+            <div class="col">
+                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"  width="24" height="24" viewBox="0 0 24 24">
+				<path fill="#6236FF" d="M17 14H19V17H22V19H19V22H17V19H14V17H17V14M5 20V12H2L12 3L22 12H17V10.19L12 5.69L7 10.19V18H12C12 18.7 12.12 19.37 12.34 20H5Z" />
+				</svg>
+				<strong>Status</strong>
+            </div>
+        </a>
+        <a href="paket.html" class="item">
+            <div class="col">
+                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"  width="24" height="24" viewBox="0 0 24 24">
+				<path fill="#6236FF" d="M19 23.3L18.4 22.8C16.4 20.9 15 19.7 15 18.2C15 17 16 16 17.2 16C17.9 16 18.6 16.3 19 16.8C19.4 16.3 20.1 16 20.8 16C22 16 23 16.9 23 18.2C23 19.7 21.6 20.9 19.6 22.8L19 23.3M18 2C19.1 2 20 2.9 20 4V13.08L19 13L18 13.08V4H13V12L10.5 9.75L8 12V4H6V20H13.08C13.2 20.72 13.45 21.39 13.8 22H6C4.9 22 4 21.1 4 20V4C4 2.9 4.9 2 6 2H18Z" />
+				</svg>
+				<strong>Paket</strong>
+            </div>
+        </a>
+		<a href="javascript:;" class="item" data-bs-toggle="modal" data-bs-target="#DialogBasic">
+            <div class="col">
+                <div class="action-button large">
+                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"  width="24" height="24" viewBox="0 0 24 24">
+				<path fill="#ffffff" d="M16,17V14H9V10H16V7L21,12L16,17M14,2A2,2 0 0,1 16,4V6H14V4H5V20H14V18H16V20A2,2 0 0,1 14,22H5A2,2 0 0,1 3,20V4A2,2 0 0,1 5,2H14Z" />
+				</svg>
+                </div>
+            </div>
+        </a>
+		<a href="faq.html" class="item">
+            <div class="col">
+                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"  width="24" height="24" viewBox="0 0 24 24">
+				<path fill="#6236FF" d="M18,15H6L2,19V3A1,1 0 0,1 3,2H18A1,1 0 0,1 19,3V14A1,1 0 0,1 18,15M23,9V23L19,19H8A1,1 0 0,1 7,18V17H21V8H22A1,1 0 0,1 23,9M8.19,4C7.32,4 6.62,4.2 6.08,4.59C5.56,5 5.3,5.57 5.31,6.36L5.32,6.39H7.25C7.26,6.09 7.35,5.86 7.53,5.7C7.71,5.55 7.93,5.47 8.19,5.47C8.5,5.47 8.76,5.57 8.94,5.75C9.12,5.94 9.2,6.2 9.2,6.5C9.2,6.82 9.13,7.09 8.97,7.32C8.83,7.55 8.62,7.75 8.36,7.91C7.85,8.25 7.5,8.55 7.31,8.82C7.11,9.08 7,9.5 7,10H9C9,9.69 9.04,9.44 9.13,9.26C9.22,9.08 9.39,8.9 9.64,8.74C10.09,8.5 10.46,8.21 10.75,7.81C11.04,7.41 11.19,7 11.19,6.5C11.19,5.74 10.92,5.13 10.38,4.68C9.85,4.23 9.12,4 8.19,4M7,11V13H9V11H7M13,13H15V11H13V13M13,4V10H15V4H13Z" />
+				</svg>
+				<strong>FAQ</strong>
+            </div>
+        </a>
+        <a href="kontak.html" class="item">
+            <div class="col">
+                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"  width="24" height="24" viewBox="0 0 24 24">
+				<path fill="#6236FF" d="M6,17C6,15 10,13.9 12,13.9C14,13.9 18,15 18,17V18H6M15,9A3,3 0 0,1 12,12A3,3 0 0,1 9,9A3,3 0 0,1 12,6A3,3 0 0,1 15,9M3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5A2,2 0 0,0 19,3H5C3.89,3 3,3.9 3,5Z" />
+				</svg>
+				<strong>Kontak</strong>
+            </div>
+        </a>
+    </div>
+    <!-- * App Bottom Menu -->
+
+	<!-- START Live Status by afarhansib.github.io -->
+  	<script>
+		var time = "$(session-time-left)";
+		time = time.replace(/w/g,'w ').replace(/d/g,'d ').replace(/h/g,'h ').replace(/m/g,'m ').replace(/s/g,'s ');
+		waktu = time.replace(/w /g,'Minggu').replace(/d /g,'Hari').replace(/h /g,'Jam').replace(/m /g,'Menit').replace(/s /g,'Detik');
+		sisawaktu = waktu.replace(/Minggu/g,' mg ').replace(/Hari/g,' hr ').replace(/Jam/g,' jam ').replace(/Menit/g,' mnt ').replace(/Detik/g,' dtk ');
+		document.getElementById("timeLeftStatus").innerHTML = sisawaktu; 
+	</script>
+	<script>
+		var kon = "$(uptime)";
+		kon = kon.replace(/w/g,'w ').replace(/d/g,'d ').replace(/h/g,'h ').replace(/m/g,'m ').replace(/s/g,'s ');
+		koneksi = kon.replace(/w /g,'Minggu').replace(/d /g,'Hari').replace(/h /g,'Jam').replace(/m /g,'Menit').replace(/s /g,'Detik');
+		terkon = koneksi.replace(/Minggu/g,' mg ').replace(/Hari/g,' hr ').replace(/Jam/g,' jam ').replace(/Menit/g,' mnt ').replace(/Detik/g,' dtk ');
+		document.getElementById("uptimeStatus").innerHTML = terkon; 
+	</script>
+	<!-- END Live Status by afarhansib.github.io -->	
+
+    <!-- ========= JS Files =========  -->
+    <!-- Bootstrap -->
+    <script src="assets/js/lib/bootstrap.bundle.min.js"></script>
+    <!-- Base Js File -->
+    <script src="assets/js/base.js"></script>
+
+</body>
+
+</html>

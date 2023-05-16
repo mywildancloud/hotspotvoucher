@@ -1,0 +1,34 @@
+Kontak :
+Grup WhatsApp => https://chat.whatsapp.com/IBOn9JgyiN2HQfMlxj254A
+Instagram => https://instagram.com/badaro.id
+Halaman Trakteer (Link Post/Download) => https://trakteer.id/badaro
+
+Fitur :
+Login Voucher/Member/Qr-Code (Mikhmon)/Coba Gratis(Trial)
+Translate Format Waktu status.html (Terhubung & Sisa Waktu) "1m 2w 3d 4h 5m 6s" menjadi "1 bln 2 mgg 3 hr 4 jam 5 mnt 6 dtk"
+Mode Gelap/ Dark Mode
+Tampilan Mobile Responsif
+Halaman ISOLIR Otomatis (Hotspot)
+Halaman Paket (Harga Voucher)
+Halaman FAQ
+Halaman Kontak ( Data formulir langsung masuk ke Telegram Messenger)
+Halaman Cek Status Expired (Mikhmon)
+Menu Beranda X Status dan Menu Logout X Login QR-Code (Jika user belum login maka pada ke empat halaman di atas akan muncul menu "Beranda & Login QR-Code", jika user sudah login maka akan muncul menu "Status & Logout")
+Mudah di edit dengan folder khusus (Config) 
+
+
+Tambahkan script berikut di MikroTik via Terminal.(Untuk bypass Formulir Kontak Api Telgeram & ScanQR by Laksa19) :
+/ip hotspot walled-garden ip
+add action=accept comment="Api Telegram Contact Form" disabled=no dst-host=api.telegram.org
+add action=accept comment="Mikhmon QR Code Scanner" disabled=no dst-host=laksa19.github.io
+
+
+Edit File :
+- Nama ISP/WiFi (Nama RT/RW NET) ===> assets/config/namawifi.js
+- Teks Supported/Coppyrigth ===> assets/config/supported.js
+- No Kontak Telepon ===> assets/config/notelepon.js
+- Harga Paket Unggulan ===> login.html baris 180 - 211 ( Komentar: <!-- Paket Unggulan --> )
+- Harga Paket Lainnya ===> paket.html ( "1 paket harga" dimulai dari komentar <!-- batas atas paket --> dan diakhiri <!-- * batas bawah paket --> )
+- Formulir Kontak Telegram ===> kontak.html (Sesuaikan chat_id dan BotID Telegram pada baris ke 221 dalam komentar <!-- * KONTAK TELEGRAM --> )
+- Alamat Kantor/Server ===> kontak.html dimulai dari baris 112 atau dalam komentar <!-- Alamat -->
+- Link Mikhmon Server Status ===> masaaktif.html (sesuaikan url mikhmon server pada baris ke 44)
