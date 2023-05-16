@@ -1365,8 +1365,7 @@ a.badge-dark {
 }
 
 .link-listview > li a:after {
-  content: "\f3d1";
-  font-family: "Ionicons";
+
   font-size: 18px;
   position: absolute;
   right: 16px;
@@ -1438,7 +1437,7 @@ a.badge-dark {
 
 .image-listview > li a.item {
   color: #27173E !important;
-  padding-right: 36px;
+  padding-right: 10px;
 }
 
 .image-listview > li a.item:active {
@@ -1446,11 +1445,10 @@ a.badge-dark {
 }
 
 .image-listview > li a.item:after {
-  content: "\f3d1";
-  font-family: "Ionicons";
-  font-size: 18px;
+
+  font-size: 1px;
   position: absolute;
-  right: 16px;
+  right: 1px;
   color: #A9ABAD;
   opacity: 0.6;
   line-height: 1em;

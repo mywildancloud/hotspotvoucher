@@ -2,6 +2,24 @@ Kontak :
 Grup WhatsApp => https://chat.whatsapp.com/IBOn9JgyiN2HQfMlxj254A
 Instagram => https://instagram.com/badaro.id
 Halaman Trakteer (Link Post/Download) => https://trakteer.id/badaro
+Tes Pesan Masuk Chat Telegram Formulir (Halaman Bantuan.html) => https://t.me/+AxRwTtWbmw5kNWQ1
+
+Peningkatan V2 dari V1:
+- Fix Translate Format Waktu status.html
+- Fix Link Redirect di alogin.html
+- Menggabungkan halaman kontak.html & faq.html menjadi bantuan.html
+- Menghapus halaman paket.html digabung dalam login.html
+- Perbaikan form telegram api (bantuan.html):
+	*penambahan form keperluan (opsi Pilihan: Layanan Pelanggan, Bantuan Teknisi, Konfirmasi Pembayaran & Pendaftaran Pasang Baru)
+	*penambahan form Kode/MAC (kunci form dengan MAC/jika belum login, kunci form dengan kode user/jika sudah login)
+	*perbaikan pesan ke telegram lebih rapi dan tersusun
+	*perubahan pesan no WA menjadi link Whatsapp_chat sehingga bisa langsung di klik untuk menindak lanjuti formulir tersebut kepada pelanggan
+- Penambahan Banner Slide Promosi di login page
+- Penambahan foto produk untuk paket voucher
+- Penambahan Fitur Pembayaran via QRIS
+- Penambahan link GMaps pada info Alamat
+- Menu bawah lebih simpel, dari 5 menu menjadi 3 menu saja
+- Perubahan tampilan status.html
 
 Fitur :
 Login Voucher/Member/Qr-Code (Mikhmon)/Coba Gratis(Trial)
@@ -9,26 +27,36 @@ Translate Format Waktu status.html (Terhubung & Sisa Waktu) "1m 2w 3d 4h 5m 6s" 
 Mode Gelap/ Dark Mode
 Tampilan Mobile Responsif
 Halaman ISOLIR Otomatis (Hotspot)
-Halaman Paket (Harga Voucher)
-Halaman FAQ
-Halaman Kontak ( Data formulir langsung masuk ke Telegram Messenger)
 Halaman Cek Status Expired (Mikhmon)
-Menu Beranda X Status dan Menu Logout X Login QR-Code (Jika user belum login maka pada ke empat halaman di atas akan muncul menu "Beranda & Login QR-Code", jika user sudah login maka akan muncul menu "Status & Logout")
+Halaman Pembayaran (Scan QRIS)
+Halaman Bantuan ( Data formulir langsung masuk ke Telegram Messenger)
+Menu Beranda X Status dan Menu Logout X Login QR-Code (Jika user belum login maka pada halaman Pembayaran & Bantuan  akan muncul menu "Beranda & Login QR-Code", jika user sudah login maka akan muncul menu "Status & Logout")
 Mudah di edit dengan folder khusus (Config) 
 
-
-Tambahkan script berikut di MikroTik via Terminal.(Untuk bypass Formulir Kontak Api Telgeram & ScanQR by Laksa19) :
+PENTING: 
+Tambahkan script berikut di MikroTik via Terminal.(Untuk bypass Formulir Kontak Api Telgeram sebelum user login & ScanQR by Laksa19) :
 /ip hotspot walled-garden ip
 add action=accept comment="Api Telegram Contact Form" disabled=no dst-host=api.telegram.org
 add action=accept comment="Mikhmon QR Code Scanner" disabled=no dst-host=laksa19.github.io
 
-
-Edit File :
-- Nama ISP/WiFi (Nama RT/RW NET) ===> assets/config/namawifi.js
-- Teks Supported/Coppyrigth ===> assets/config/supported.js
-- No Kontak Telepon ===> assets/config/notelepon.js
-- Harga Paket Unggulan ===> login.html baris 180 - 211 ( Komentar: <!-- Paket Unggulan --> )
-- Harga Paket Lainnya ===> paket.html ( "1 paket harga" dimulai dari komentar <!-- batas atas paket --> dan diakhiri <!-- * batas bawah paket --> )
-- Formulir Kontak Telegram ===> kontak.html (Sesuaikan chat_id dan BotID Telegram pada baris ke 221 dalam komentar <!-- * KONTAK TELEGRAM --> )
-- Alamat Kantor/Server ===> kontak.html dimulai dari baris 112 atau dalam komentar <!-- Alamat -->
+Yang PERLU di edit :
+- Folder assets/config
+	*Nama ISP/WiFi (Nama RT/RW NET) ===> assets/config/namawifi.js
+	*Teks Supported/Coppyrigth ===> assets/config/supported.js
+	*No Kontak Telepon ===> assets/config/notelepon.js
+	*Alamat ===> assets/config/alamat.js
+	*Informasi (Notifikasi) ===> assets/config/informasi.js
+	*Link GMaps ===> assets/config/googlemaps.js
+	*Halaman BANTUAN (Formulir Telegram) ===> assets/config/telegrambot.js baris 11 & 12
 - Link Mikhmon Server Status ===> masaaktif.html (sesuaikan url mikhmon server pada baris ke 44)
+- Banner Slide ===> login.html baris 107 - 133 / 3 jenis slide ( Komentar atas: <!-- gambar slider awal --> ,Komentar bawah: <!-- *akhir gambar slider --> )
+	* Gambar banner slide ==> assets/img/sample/slide/
+- Harga Paket Voucher ===> login.html baris 226 - 285 / 4 jenis produk ( Komentar atas: <!-- list produk --> ,Komentar bawah: <!-- * batas list produk --> )
+	* Gambar paket voucher ==> assets/img/sample/produk/
+- Logo ===> Ganti logo-icon.png pada folder assets/img/ dengan nama yang sama
+- Favicon ===> Ganti favicon.png pada folder assets/img/ dengan nama yang sama
+
+Ukuran Slide Banner
+- Disarankan Landscape 2:1
+Ukuran Foro Produk
+- Disarankan Persegi 1:1

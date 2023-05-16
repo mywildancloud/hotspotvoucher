@@ -1,1 +1,3 @@
-document.write('BADARO.ID') //Ganti dengan Nama Wifi Agan
+document.write('BADARO.ID')
+//Ganti BADARO.ID dengan Nama Wifi Agan
+//Jangan Menghapus kode scriptnya

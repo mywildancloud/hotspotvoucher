@@ -140,6 +140,7 @@ document.addEventListener('DOMContentLoaded', function () {
         padding: 16,
         arrows: false,
         pagination: false,
+		autoplay: true,
         breakpoints: {
             768: {
                 perPage: 1
@@ -176,11 +177,12 @@ document.addEventListener('DOMContentLoaded', function () {
         type: "loop",
         gap: 16,
         padding: 16,
-        arrows: false,
+        arrows: true,
         pagination: false,
+		autoplay: true,
         breakpoints: {
             768: {
-                perPage: 4
+                perPage: 3
             },
             991: {
                 perPage: 7

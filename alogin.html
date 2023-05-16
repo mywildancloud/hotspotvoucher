@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-	<meta http-equiv="refresh" content="3; url=$(link-redirect)">
+	<meta http-equiv="refresh" content="5; url=$(link-redirect)">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport"
         content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, viewport-fit=cover" />
@@ -19,7 +19,7 @@
 	</script>
 </head>
 
-<body class="bg-white">
+<body onLoad="startClock()" class="bg-white">
 
     <!-- App Header -->
     <div class="appHeader no-border">
@@ -43,8 +43,8 @@
 
                 <div class="transfer-verification">
                     <div class="transfer-amount">
-                        <span class="caption">SUKSES</span>
-                        <h2>Kode <span class="text-success">$(username)</span> Terverifikasi</h2><br/>
+                        <span class="caption">Terverifikasi</span>
+                        <h2>Kode <span class="text-success">$(username)</span> Sukses</h2><br/>
                     </div>
                     <div class="from-to-block mb-5">
                         <div class="item text-start">
@@ -64,7 +64,7 @@
                         <div class="arrow"></div>
                     </div>
                 </div>
-                <div class="spinner-border text-primary" role="status"></div><h2 class="mb-2 mt-2">Anda akan dialihkan ke Halaman Status</h2>
+                <h2 class="mb-2 mt-2">Anda akan dialihkan ke Halaman Status</h2>
                 <p>
                     <strong class="text-primary">Jika tidak otomatis,</strong><br>Silahkan klik Lanjutkan
                 </p>
